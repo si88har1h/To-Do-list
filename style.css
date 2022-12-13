@@ -1,0 +1,328 @@
+:root {
+  --dark-theme-bg: hsl(235, 21%, 11%);
+  --dark-theme-list-bg: hsl(235, 24%, 19%);
+  --dark-theme-text: hsl(234, 39%, 85%);
+  --dark-theme-text-hover: hsl(236, 33%, 92%);
+  --bright-blue: hsl(220, 98%, 61%);
+  --dark-grayish-blue: hsl(234, 11%, 52%);
+  --dark-color-sort: hsl(233, 14%, 35%);
+  --light-theme-bg: hsl(236, 33%, 92%);
+  --light-theme-list-bg: hsl(0, 0%, 98%);
+  --light-theme-text: hsl(235, 19%, 35%);
+  --light-theme-sort: hsl(236, 9%, 61%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  position: relative;
+  background-color: var(--dark-theme-bg);
+  color: var(--dark-theme-text);
+  font-family: "Josefin Sans";
+  font-weight: 400;
+}
+
+/* GENERAL STYLES */
+
+button {
+  border: none;
+  background: none;
+}
+.icon {
+  cursor: pointer;
+}
+textarea:focus,
+input:focus {
+  outline: none;
+}
+.checkbox__container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  padding-left: 3.5rem;
+  margin-bottom: 1.6rem;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox__container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.7rem;
+  width: 1.7rem;
+  background-color: var(--dark-theme-list-bg);
+  border: 1px solid var(--dark-grayish-blue);
+  border-radius: 50%;
+}
+
+.checkbox__container input:checked ~ .checkmark {
+  background: linear-gradient(45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox__container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox__container .checkmark:after {
+  left: 0.1rem;
+  top: 0.1rem;
+  width: 10px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg) scale(0.4);
+}
+
+/* /////////////////////////////// */
+.header__img {
+  width: 100%;
+}
+
+.to-do__section {
+  position: absolute;
+  top: 10rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 25%;
+}
+
+.to-do__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.heading__primary {
+  font-size: 4rem;
+  text-transform: uppercase;
+  padding-top: 1rem;
+  letter-spacing: 1.2rem;
+}
+
+.to-do__input {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: var(--dark-theme-list-bg);
+  margin-bottom: 2rem;
+}
+.to-do__input .checkbox__container {
+  pointer-events: none;
+}
+
+.to-do__input--box {
+  background: none;
+  border: none;
+  font-family: "Josefin Sans";
+  width: 100%;
+  caret-color: var(--bright-blue);
+  color: var(--dark-theme-text);
+  font-size: 1.5rem;
+}
+
+.to-do__list {
+  position: relative;
+  background-color: var(--dark-theme-list-bg);
+  height: 30rem;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.list__item {
+  display: grid;
+  grid-template-columns: 2rem auto 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  border-bottom: 1px solid var(--dark-grayish-blue);
+}
+
+.list__item .icon {
+  justify-self: end;
+  transform: scale(0.7);
+}
+
+.task {
+  justify-self: start;
+  margin-top: 0.5rem;
+}
+
+.task__info-bar {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  background-color: var(--dark-theme-list-bg);
+  padding: 1.5rem;
+  align-items: center;
+  color: var(--dark-grayish-blue);
+  font-size: 1.2rem;
+  margin-bottom: 4rem;
+}
+.task__counter {
+  grid-column: 1 /3;
+}
+.sort__fields {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-column: 3/5;
+}
+.sort-field,
+.clear__tasks {
+  cursor: pointer;
+  font-family: "Josefin Sans";
+  color: var(--dark-grayish-blue);
+  transition: all 300ms;
+}
+button:not(.active).sort-field:hover,
+.clear__tasks:hover {
+  color: var(--dark-theme-text-hover);
+}
+
+.clear__tasks {
+  grid-column: 5/-1;
+  justify-self: end;
+}
+
+.drag__message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--dark-color-sort);
+}
+
+/* HELPER CLASSES */
+
+.hidden {
+  display: none;
+}
+.invisible {
+  visibility: hidden;
+}
+
+/* empty msg */
+.empty__msg {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark-color-sort);
+}
+
+.emoji {
+  font-size: 7rem;
+}
+
+.empty__msg.hidden p,
+.empty__msg.hidden span {
+  display: none;
+}
+/* ///////////////////////////// */
+/* MODE SPECIFIC STYLES */
+/* ///////////////////////////// */
+
+.light__mode {
+  background-color: var(--light-theme-bg);
+}
+
+.light__mode .to-do__input,
+.light__mode input,
+.light__mode .to-do__list {
+  background-color: var(--light-theme-list-bg);
+  color: var(--light-theme-text);
+}
+
+.light__mode .list__item {
+  border-bottom: 1px solid var(--light-theme-bg);
+}
+
+.light__mode .checkmark {
+  background-color: var(--light-theme-list-bg);
+  border: 1px solid hsl(236, 33%, 92%);
+}
+.light__mode .task__counter {
+  color: var(--light-theme-sort);
+}
+
+.light__mode .task__info-bar {
+  background-color: var(--light-theme-list-bg);
+}
+
+.light__mode .sort-field {
+  color: var(--light-theme-sort);
+}
+
+.light__mode button:not(.active).sort-field:hover,
+.light__mode .clear__tasks:hover {
+  color: var(--light-theme-text);
+}
+
+.light__mode .active {
+  color: var(--bright-blue);
+}
+
+.light__mode .drag__message {
+  color: var(--light-theme-text);
+}
+
+.light__mode .selected {
+  text-decoration: line-through;
+  color: var(--light-theme-bg);
+}
+
+/* STATE CLASSES */
+
+.selected {
+  text-decoration: line-through;
+  color: var(--dark-grayish-blue);
+}
+
+.list__item:hover .icon {
+  display: block;
+}
+
+.active {
+  color: var(--bright-blue);
+}
+
+.icon__moon,
+.icon__sun {
+  position: absolute;
+  right: 0;
+}
