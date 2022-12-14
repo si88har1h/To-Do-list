@@ -321,7 +321,7 @@ button:not(.active).sort-field:hover,
 
 /* STATE CLASSES */
 
-.completed {
+.completed .task {
   text-decoration: line-through;
   color: var(--dark-grayish-blue);
 }
